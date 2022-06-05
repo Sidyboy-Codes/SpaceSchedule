@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AddSpaceAgency";
+}
+
+<h2>Add a new Space Agency</h2>
+<form action="/SpaceAgencies/Add" method="post">
+    <div>
+        <label for="sa_name">Name :</label>
+        <input type="text" id="sa_name" name="SpaceAgencyName" />
+    </div>
+    <div>
+        <label for="sa_info">Info :</label>
+        <input type="text" id="sa_info" name="SpaceAgencyInfo" />
+    </div>
+    <button type="submit">Add</button>
+</form>
+

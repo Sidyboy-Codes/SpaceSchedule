@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SpaceSchedule.Models.RocketDto>
+@{
+    ViewBag.Title = "AddLaunch";
+}
+
+<h2>Add a new Launch</h2>
+<form action="/Launches/Add" method="post">
+    <div>
+        <label for="l_name">Mission Name : </label>
+        <input type="text" id="l_name" name="LaunchName" />
+    </div>
+
+    <div>
+        <label for="l_info">Mission Info : </label>
+        <input type="text" id="l_info" name="LaunchInfo" />
+    </div>
+
+    <div>
+        <label for="l_dateTime">DateTime (dd-mm-yyyy hh:mm:ss) : </label>
+        <input type="text" id="l_dateTime" name="LaunchDate" />
+    </div>
+
+    <div>
+        <label for="l_rocket">Rocket</label>
+        <select id="l_rocket" name="RocketID">
+            @foreach(var rocket in Model)
+            {
+                <option value="@rocket.RocketID">@rocket.RocketName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Add</button>
+</form>
+

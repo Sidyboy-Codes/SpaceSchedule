@@ -1,0 +1,11 @@
+﻿@model SpaceSchedule.Models.LaunchDto
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Mission @Model.LaunchName</h2>
+<p>Rocket Name : <a href="/Rockets/Details/@Model.RocketID">@Model.RocketName</a></p>
+<p>Mission Info : @Model.LaunchInfo</p>
+<p>Launch Date : @Model.LaunchDate.ToLongDateString()</p>
+<p>Launch Time : @Model.LaunchDate.ToString("HH:mm")</p>
+

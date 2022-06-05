@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SpaceSchedule.Models.SpaceAgency>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of all Space Agencies</h2>
+@foreach(var spaceAgency in Model)
+            {
+                <h3><a href="/SpaceAgencies/Details/@spaceAgency.SpaceAgencyID">@spaceAgency.SpaceAgencyName</a></h3>
+                
+            }
+
+<a href="/SpaceAgencies/AddSpaceAgency">Add a new Space Agency</a>
+

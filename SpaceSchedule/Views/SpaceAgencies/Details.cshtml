@@ -1,0 +1,13 @@
+﻿@model SpaceSchedule.Models.ViewModels.DetailsSpaceAgency
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Space agency @Model.SelectedSpaceAgency.SpaceAgencyName</h2>
+<p>Space Agency info : @Model.SelectedSpaceAgency.SpaceAgencyInfo</p>
+
+<h2>All Rockets from @Model.SelectedSpaceAgency.SpaceAgencyName</h2>
+@foreach (var rocket in Model.RocketsBySpaceAgency) {
+<p>Rocket : <a href="/Rockets/Details/@rocket.RocketID">@rocket.RocketName</a></p>
+}
+

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SpaceSchedule.Models.SpaceAgency>
+@{
+    ViewBag.Title = "AddRocket";
+}
+
+<h2>Add a New Rocket</h2>
+<form action="/Rockets/Add" method="post">
+    <div>
+        <label for="r_name">Name : </label>
+        <input type="text" id="r_name" name="RocketName" />
+    </div>
+
+    <div>
+        <label for="r_info">Info : </label>
+        <input type="text" id="r_info" name="RocketInfo" />
+    </div>
+
+    <div>
+        <label for="sa_name">Space Agency : </label>
+        <select id="sa_name" name="SpaceAgencyId">
+            @foreach(var spaceAgency in Model)
+            {
+                <option value="@spaceAgency.SpaceAgencyID">@spaceAgency.SpaceAgencyName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Add</button>
+
+</form>

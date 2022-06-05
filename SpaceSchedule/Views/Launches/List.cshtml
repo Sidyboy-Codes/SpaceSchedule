@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SpaceSchedule.Models.LaunchDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of all Launches</h2>
+@foreach(var launch in Model)
+            {
+                <h3>Mission : <a href="/Launches/Details/@launch.LaunchId">@launch.LaunchName</a></h3>
+                <p>Launch Date : @launch.LaunchDate.ToLongDateString()</p>
+                
+            }
+
+<a href="/Launches/AddLaunch">Add a new Launch</a>
+
