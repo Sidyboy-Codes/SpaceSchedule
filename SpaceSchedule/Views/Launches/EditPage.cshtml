@@ -1,0 +1,45 @@
+﻿@model SpaceSchedule.Models.ViewModels.EditLaunch
+@{
+    ViewBag.Title = "EditPage";
+}
+
+<h2>Edit Launch @Model.editLaunch.LaunchName</h2>
+<form action="/Launches/Edit/@Model.editLaunch.LaunchId" method="post">
+    <div style="display:none;">
+        <input type="number" name="LaunchID" value="@Model.editLaunch.LaunchId" />
+    </div>
+    <div>
+        <label for="l_name">Mission Name : </label>
+        <input type="text" id="l_name" name="LaunchName" value="@Model.editLaunch.LaunchName"/>
+    </div>
+
+    <div>
+        <label for="l_info">Mission Info : </label>
+        <input type="text" id="l_info" name="LaunchInfo" value="@Model.editLaunch.LaunchInfo"/>
+    </div>
+
+    <div>
+        <label for="l_dateTime">DateTime (dd-mm-yyyy hh:mm:ss) : </label>
+        <input type="text" id="l_dateTime" name="LaunchDate" value="@Model.editLaunch.LaunchDate"/>
+        @* Why 2 hrs are added automatically ?? *@
+    </div>
+
+    <div>
+        <label for="l_rocket">Rocket : </label>
+        <select id="l_rocket" name="RocketID">
+            @foreach (var rocket in Model.editRockets)
+            {
+                string selected = "";
+
+                if(rocket.RocketID == Model.editLaunch.RocketID)
+                {
+                    selected = "selected";
+                }
+                <option value="@rocket.RocketID" @selected >@rocket.RocketName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Edit</button>
+</form>
+

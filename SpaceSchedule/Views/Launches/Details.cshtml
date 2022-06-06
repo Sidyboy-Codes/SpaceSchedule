@@ -9,3 +9,5 @@
 <p>Launch Date : @Model.LaunchDate.ToLongDateString()</p>
 <p>Launch Time : @Model.LaunchDate.ToString("HH:mm")</p>
 
+<a href="/Launches/EditPage/@Model.LaunchId">Edit Launch</a>
+<a href="/Launches/DeletePage/@Model.LaunchId" style="all:unset; display:block; color:red; cursor:pointer;">Delete</a>

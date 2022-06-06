@@ -1,0 +1,40 @@
+﻿@model SpaceSchedule.Models.ViewModels.EditRocket
+@{
+    ViewBag.Title = "EditPage";
+}
+
+<h2>Edit Rocket @Model.editRocket.RocketName</h2>
+<form action="/Rockets/Edit/@Model.editRocket.RocketID" method="post">
+    <div style="display:none;">
+        <input type="number" name="RocketID" value="@Model.editRocket.RocketID" />
+    </div>
+    <div>
+        <label for="r_name">Name : </label>
+        <input type="text" id="r_name" name="RocketName" value="@Model.editRocket.RocketName"/>
+    </div>
+
+    <div>
+        <label for="r_info">Info : </label>
+        <input type="text" id="r_info" name="RocketInfo" value="@Model.editRocket.RocketInfo"/>
+    </div>
+
+    <div>
+        <label for="sa_name">Space Agency : </label>
+        <select id="sa_name" name="SpaceAgencyId">
+            @foreach (var spaceAgency in Model.editspaceAgencies)
+            {
+                string selected = "";
+
+                if(spaceAgency.SpaceAgencyID == Model.editRocket.SpaceAgencyID)
+                {
+                    selected = "selected";
+                }
+                <option value="@spaceAgency.SpaceAgencyID" @selected>@spaceAgency.SpaceAgencyName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Edit</button>
+
+</form>
+

@@ -1,0 +1,17 @@
+﻿@model SpaceSchedule.Models.LaunchDto
+@{
+    ViewBag.Title = "DeletePage";
+}
+
+<h2>Are you sure to Delete @Model.LaunchName</h2>
+<p>Mission On : @Model.LaunchDate</p>
+
+<form action="/Launches/Delete/@Model.LaunchId" method="post">
+    <div style="display:none;">
+        <input type="number" name="LaunchID" value="@Model.LaunchId" />
+    </div>
+    <a href="/Launches/List">Cancel</a>
+    <button type="submit">Confirm Delete</button>
+
+</form>
+

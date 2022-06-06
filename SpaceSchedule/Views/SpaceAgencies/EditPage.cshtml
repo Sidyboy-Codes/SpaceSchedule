@@ -1,0 +1,21 @@
+﻿@model SpaceSchedule.Models.SpaceAgency
+@{
+    ViewBag.Title = "EditPage";
+}
+
+<h2>Edit Space Agency @Model.SpaceAgencyName</h2>
+<form action="/SpaceAgencies/Edit/@Model.SpaceAgencyID" method="post">
+    <div style="display:none;">
+        <input type="number" name="SpaceAgencyID" value="@Model.SpaceAgencyID" />
+    </div>
+    <div>
+        <label for="sa_name">Name :</label>
+        <input type="text" id="sa_name" name="SpaceAgencyName" value="@Model.SpaceAgencyName" />
+    </div>
+    <div>
+        <label for="sa_info">Info :</label>
+        <input type="text" id="sa_info" name="SpaceAgencyInfo" value="@Model.SpaceAgencyInfo"/>
+    </div>
+    <button type="submit">Update</button>
+</form>
+

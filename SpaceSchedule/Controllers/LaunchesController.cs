@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Diagnostics;
+using SpaceSchedule.Models.ViewModels;
 
 namespace SpaceSchedule.Controllers
 {
@@ -88,47 +89,81 @@ namespace SpaceSchedule.Controllers
             }
         }
 
-        // GET: Launches/Edit/5
-        public ActionResult Edit(int id)
+        // ************** Updating a Launch with given id **************************
+
+        // GET: Launches/EditPage/5
+        public ActionResult EditPage(int id)
         {
-            return View();
+            EditLaunch ViewModel = new EditLaunch();
+
+
+            string url = "LaunchesData/FindLaunch/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            LaunchDto launch = response.Content.ReadAsAsync<LaunchDto>().Result;
+            ViewModel.editLaunch = launch;
+            
+            url = "RocketsData/ListRockets";
+            response = client.GetAsync(url).Result;
+            IEnumerable<RocketDto> rockets = response.Content.ReadAsAsync<IEnumerable<RocketDto>>().Result;
+            ViewModel.editRockets = rockets;
+            
+            return View(ViewModel);
         }
 
         // POST: Launches/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, LaunchDto launch)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "LaunchesData/UpdateLaunch/" + id;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(launch);
+            Debug.WriteLine("JSON IS" + jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Launches/Delete/5
-        public ActionResult Delete(int id)
+        // ************** Deleteing a launch of given ID *****************************
+
+        // GET: Launches/DeletePage/5
+        [HttpGet]
+        public ActionResult DeletePage(int id)
         {
-            return View();
+
+            string url = "LaunchesData/FindLaunch/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            LaunchDto Launch = response.Content.ReadAsAsync<LaunchDto>().Result;
+
+            return View(Launch);
         }
 
         // POST: Launches/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "LaunchesData/DeleteLaunch/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

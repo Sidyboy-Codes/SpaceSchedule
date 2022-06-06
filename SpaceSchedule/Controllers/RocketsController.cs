@@ -98,47 +98,82 @@ namespace SpaceSchedule.Controllers
             }
         }
 
-        // GET: Rockets/Edit/5
-        public ActionResult Edit(int id)
+        // *************************** Updating a Rocket with given id ***************************
+
+        // GET: Rockets/EditPage/5
+        [HttpGet]
+        public ActionResult EditPage(int id)
         {
-            return View();
+            EditRocket ViewModel = new EditRocket();
+
+            string url = "RocketsData/FindRocket/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            RocketDto rocket = response.Content.ReadAsAsync<RocketDto>().Result;
+            ViewModel.editRocket = rocket;
+
+
+            url = "SpaceAgenciesData/ListSpaceAgencies";
+            response = client.GetAsync(url).Result;
+            IEnumerable<SpaceAgency> spaceAgencies = response.Content.ReadAsAsync<IEnumerable<SpaceAgency>>().Result;
+            ViewModel.editspaceAgencies = spaceAgencies;
+
+            return View(ViewModel);
         }
 
         // POST: Rockets/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, RocketDto rocket)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "RocketsData/UpdateRocket/" + id;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(rocket);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Rockets/Delete/5
-        public ActionResult Delete(int id)
+
+        // ************** Deleteing a Rocket of given ID *****************************
+
+        // GET: Rockets/DeletePage/5
+        [HttpGet]
+        public ActionResult DeletePage(int id)
         {
-            return View();
+            string url = "RocketsData/FindRocket/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            RocketDto Rocket = response.Content.ReadAsAsync<RocketDto>().Result;
+
+            return View(Rocket);
         }
 
         // POST: Rockets/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "RocketsData/DeleteRocket/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

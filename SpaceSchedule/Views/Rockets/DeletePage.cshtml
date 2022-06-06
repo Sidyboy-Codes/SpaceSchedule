@@ -1,0 +1,17 @@
+﻿@model SpaceSchedule.Models.RocketDto
+@{
+    ViewBag.Title = "DeletePage";
+}
+
+<h2>Are you sure to Delete @Model.RocketName</h2>
+<p>A rocket by : @Model.SpaceAgencyName</p>
+
+<form action="/Rockets/Delete/@Model.RocketID" method="post">
+    <div style="display:none;">
+        <input type="number" name="RocketID" value="@Model.RocketID" />
+    </div>
+    <a href="/Rockets/List">Cancel</a>
+    <button type="submit">Confirm Delete</button>
+
+</form>
+

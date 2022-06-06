@@ -1,0 +1,17 @@
+﻿@model SpaceSchedule.Models.SpaceAgency
+@{
+    ViewBag.Title = "DeletePage";
+}
+
+<h2>Are you sure to Delete @Model.SpaceAgencyName</h2>
+
+<form action="/SpaceAgencies/Delete/@Model.SpaceAgencyID" method="post">
+    <div style="display:none;">
+        <input type="number" name="LaunchID" value="@Model.SpaceAgencyID" />
+    </div>
+    <a href="/SpaceAgencies/List">Cancel</a>
+    <button type="submit">Confirm Delete</button>
+
+</form>
+
+
