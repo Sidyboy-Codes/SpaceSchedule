@@ -25,3 +25,34 @@ This project demonstrate use of all CRUD operation using C#, LINQ and Entity Fra
 	* Admin can delete the space agency using "delete" button present on details page.
 	* Admin can edit the details of space agency clicking "edit" button present on details page.
 	* Admin can view all rockets of current space agency whos detailed is being viewed.
+
+
+## How data is being accessed ? (APIs)
+#### Launches
+
+1. List of all launches.
+` api/LaunchesData/ListLaunches ` Method : GET
+2. Get Details of launch of given launch id. `api/LaunchesData/FindLaunch/1` here 1 is launch_ID. Method : GET
+3. List all launches of given rocket id. `api/LaunchesData/ListLaunchForRocket/1` here 1 is rocket_ID. Method : GET
+4. Update launch of given id. `api/LaunchesData/UpdateLaunch/1` here 1 is launch_ID. Method : POST
+5.  Add a new launch. `api/LaunchesData/AddLaunch` Method : POST
+6.  Delete a launch of given id. `api/LaunchesData/DeleteLaunch/1` Method : POST
+
+#### Rockets
+
+1. List all rockets.
+`api/RocketsData/ListRockets` Method : GET
+2. Get details of rocket of given rocket id. `api/RocketsData/FindRocket/1` here 1 is rocket_ID. Method : GET
+3. List all rockets of given space agency id. `api/RocketsData/ListRocketsForSpaceAgency/1` here 1 is spaceAgency_ID. Method : GET
+4. Update rocket of given id. `api/RocketsData/UpdateRocket/1` here 1 id rocket_ID. Method : POST
+5. Add a new rocket. `api/RocketsData/AddRocket` Method : POST
+6. Delete a rocket of given id. `api/RocketsData/DeleteRocket/1` here 1 is rocket_ID. Method : POST
+
+#### Space Agencies
+
+1. List all space agencies.
+`api/SpaceAgenciesData/ListSpaceAgencies` Method : GET
+2. Get details of space agency of given space agency id. `api/SpaceAgenciesData/FindSpaceAgency/1` here 1 is spaceAgency_ID. Method : GET
+4. Update space agency of given id. `api/SpaceAgenciesData/UpdateSpaceAgency/1` here 1 id spaceAgency_ID. Method : POST
+5. Add a new space agency. `api/SpaceAgenciesData/AddSpaceAgency` Method : POST
+6. Delete a space agency of given id. `api/SpaceAgenciesData/DeleteSpaceAgency/1` here 1 is spaceAgency_ID. Method : POST
